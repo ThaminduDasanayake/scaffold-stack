@@ -1,0 +1,19 @@
+{
+  "name": "create-stackforge",
+  "version": "0.1.0",
+  "type": "module",
+  "bin": {
+    "create-stackforge": "./dist/index.js"
+  },
+  "files": ["dist", "templates"],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@stackforge/config-schema": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0"
+  }
+}
