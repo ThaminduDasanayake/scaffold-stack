@@ -14,6 +14,7 @@ export default async function Home() {
               <p className="text-lg font-medium">
                 Signed in as {session.user.name}
               </p>
+                <p>Welcome to scaffold stack</p>
               <p className="text-sm text-gray-500">{session.user.email}</p>
             </div>
         ) : (
