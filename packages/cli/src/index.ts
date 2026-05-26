@@ -1,2 +1,7 @@
 #!/usr/bin/env node
-console.log("StackForge CLI — coming soon")
+
+import { parseFlags } from "./flags.js"
+import { scaffold } from "./scaffold.js"
+
+const choices = parseFlags(process.argv.slice(2))
+await scaffold(choices)

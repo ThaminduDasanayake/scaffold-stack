@@ -5,7 +5,10 @@
   "bin": {
     "create-stackforge": "./dist/index.js"
   },
-  "files": ["dist", "templates"],
+  "files": [
+    "dist",
+    "templates"
+  ],
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch"
@@ -14,6 +17,7 @@
     "@stackforge/config-schema": "workspace:*"
   },
   "devDependencies": {
-    "typescript": "^5.4.0"
+    "@types/node": "^20.19.41",
+    "typescript": "^5.9.3"
   }
 }
