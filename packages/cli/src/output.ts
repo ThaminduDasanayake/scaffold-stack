@@ -1,5 +1,5 @@
-import type { StackChoices } from "@stackforge/config-schema"
-import { PM_COMMANDS } from "@stackforge/config-schema"
+import type { StackChoices } from "@scaffold-stack/config-schema"
+import { PM_COMMANDS } from "@scaffold-stack/config-schema"
 
 export function printNextSteps(choices: StackChoices) {
     const { run } = PM_COMMANDS[choices.packageManager]

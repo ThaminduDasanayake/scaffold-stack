@@ -19,7 +19,8 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@scaffold-stack/config-schema": ["../../packages/config-schema/src/index.ts"]
     }
   },
   "include": [

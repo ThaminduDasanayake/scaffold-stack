@@ -1,4 +1,4 @@
-import type { StackChoices, PackageManager } from "@stackforge/config-schema"
+import type { StackChoices, PackageManager, Framework, Language, DBOrm } from "@scaffold-stack/config-schema"
 
 function getFlag(args: string[], flag: string): string | undefined {
     const match = args.find((a) => a.startsWith(`--${flag}=`))
@@ -14,7 +14,7 @@ export function parseFlags(args: string[]): StackChoices {
 
     if (!projectName || projectName.startsWith("--")) {
         console.error("  Error: Please provide a project name.")
-        console.error("  Example: pnpm dlx create-stackforge@latest my-app")
+        console.error("  Example: pnpm dlx create-scaffold-stack@latest my-app")
         process.exit(1)
     }
 
@@ -25,30 +25,36 @@ export function parseFlags(args: string[]): StackChoices {
         process.exit(1)
     }
 
+    const framework = (getFlag(args, "framework") ?? "nextjs") as Framework
+    const validFrameworks: Framework[] = ["nextjs", "vite-react"]
+    if (!validFrameworks.includes(framework)) {
+        console.error(`  Error: Invalid framework "${framework}". Choose from: nextjs, vite-react`)
+        process.exit(1)
+    }
+
+    const language = (getFlag(args, "lang") ?? "typescript") as Language
+    const validLanguages: Language[] = ["typescript", "javascript"]
+    if (!validLanguages.includes(language)) {
+        console.error(`  Error: Invalid language "${language}". Choose from: typescript, javascript`)
+        process.exit(1)
+    }
+
+    const db = (getFlag(args, "db") ?? "none") as DBOrm
+    const validDBs: DBOrm[] = ["none", "prisma-postgres", "mongoose", "drizzle"]
+    if (!validDBs.includes(db)) {
+        console.error(`  Error: Invalid database ORM "${db}". Choose from: none, prisma-postgres, mongoose, drizzle`)
+        process.exit(1)
+    }
+
     return {
         projectName,
         packageManager: pm,
-
-        tailwind: true,
-        tailwindVersion: (getFlag(args, "tw") ?? "v4") as "v3" | "v4",
-
-        typescript: true,
-        tsStrict: hasFlag(args, "ts-strict"),
-
-        eslint: (getFlag(args, "eslint") ?? "relaxed") as StackChoices["eslint"],
+        framework,
+        language,
+        tailwind: hasFlag(args, "tailwind"),
+        shadcn: hasFlag(args, "shadcn"),
+        eslint: hasFlag(args, "eslint"),
         prettier: hasFlag(args, "prettier"),
-
-        srcDir: hasFlag(args, "src-dir"),
-        structure: (getFlag(args, "structure") ?? "type") as "feature" | "type",
-
-        auth: (getFlag(args, "auth") ?? "none") as StackChoices["auth"],
-        db: (getFlag(args, "db") ?? "none") as StackChoices["db"],
-        ui: (getFlag(args, "ui") ?? "none") as StackChoices["ui"],
-        testing: (getFlag(args, "testing") ?? "none") as StackChoices["testing"],
-
-        storybook: hasFlag(args, "storybook"),
-        husky: hasFlag(args, "husky"),
-        commitlint: hasFlag(args, "commitlint"),
-        dockerCompose: hasFlag(args, "docker"),
+        db,
     }
 }

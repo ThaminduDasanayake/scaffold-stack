@@ -1,9 +1,9 @@
 {
-  "name": "create-stackforge",
+  "name": "create-scaffoldstack",
   "version": "0.1.0",
   "type": "module",
   "bin": {
-    "create-stackforge": "./dist/index.js"
+    "create-scaffoldstack": "./dist/index.js"
   },
   "files": [
     "dist",
@@ -14,7 +14,7 @@
     "dev": "tsc --watch"
   },
   "dependencies": {
-    "@stackforge/config-schema": "workspace:*"
+    "@scaffold-stack/config-schema": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^20.19.41",

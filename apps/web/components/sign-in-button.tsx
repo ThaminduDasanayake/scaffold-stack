@@ -1,6 +1,7 @@
 "use client"
 
 import { authClient } from "@/lib/auth-client"
+import { Button } from "@/components/ui/button"
 
 export default function SignInButton() {
     const { data: session } = authClient.useSession()
@@ -16,21 +17,23 @@ export default function SignInButton() {
 
     if (session) {
         return (
-            <button
+            <Button
                 onClick={handleSignOut}
-                className="rounded-md bg-red-500 px-4 py-2 text-white hover:bg-red-600"
+                variant="destructive"
+                size="lg"
             >
                 Sign out
-            </button>
+            </Button>
         )
     }
 
     return (
-        <button
+        <Button
             onClick={handleSignIn}
-            className="rounded-md bg-black px-4 py-2 text-white hover:bg-gray-800"
+            variant="default"
+            size="lg"
         >
             Sign in with GitHub
-        </button>
+        </Button>
     )
 }

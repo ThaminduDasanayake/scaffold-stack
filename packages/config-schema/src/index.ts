@@ -1,38 +1,18 @@
 export type PackageManager = "pnpm" | "npm" | "yarn" | "bun"
+export type Framework = "nextjs" | "vite-react"
+export type Language = "typescript" | "javascript"
+export type DBOrm = "none" | "prisma-postgres" | "mongoose" | "drizzle"
 
 export interface StackChoices {
     projectName: string
     packageManager: PackageManager
-
+    framework: Framework
+    language: Language
     tailwind: boolean
-    tailwindVersion: "v3" | "v4"
-
-    typescript: boolean
-    tsStrict: boolean
-
-    eslint: "none" | "relaxed" | "strict" | "custom"
-    eslintRules?: Record<string, unknown>
-
+    shadcn: boolean
+    eslint: boolean
     prettier: boolean
-    prettierConfig?: {
-        semi: boolean
-        singleQuote: boolean
-        tabWidth: 2 | 4
-        trailingComma: "none" | "es5" | "all"
-        printWidth: number
-    }
-
-    srcDir: boolean
-    structure: "feature" | "type"
-
-    auth: "none" | "nextauth" | "clerk"
-    db: "none" | "prisma-postgres" | "prisma-sqlite" | "drizzle" | "mongoose"
-    ui: "none" | "shadcn" | "radix"
-    testing: "none" | "vitest" | "jest"
-    storybook: boolean
-    husky: boolean
-    commitlint: boolean
-    dockerCompose: boolean
+    db: DBOrm
 }
 
 export const PM_COMMANDS: Record<PackageManager, {

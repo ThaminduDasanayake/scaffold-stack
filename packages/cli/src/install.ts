@@ -1,6 +1,6 @@
 import { execSync } from "child_process"
-import type { PackageManager } from "@stackforge/config-schema"
-import { PM_COMMANDS } from "@stackforge/config-schema"
+import type { PackageManager } from "@scaffold-stack/config-schema"
+import { PM_COMMANDS } from "@scaffold-stack/config-schema"
 
 export function installDependencies(dir: string, pm: PackageManager) {
     const { install } = PM_COMMANDS[pm]
@@ -26,7 +26,7 @@ export function initGit(dir: string) {
     try {
         execSync("git -C . init -b main", { cwd: dir, stdio: "pipe" })
         execSync("git -C . add -A", { cwd: dir, stdio: "pipe" })
-        execSync('git -C . commit -m "chore: initial commit from StackForge"', {
+        execSync('git -C . commit -m "chore: initial commit from Scaffold Stack"', {
             cwd: dir,
             stdio: "pipe",
         })
