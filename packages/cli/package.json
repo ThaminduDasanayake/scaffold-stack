@@ -1,6 +1,9 @@
 {
   "name": "create-scaffold-stack",
   "version": "0.1.0",
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "bin": {
     "create-scaffold-stack": "./dist/index.js"
