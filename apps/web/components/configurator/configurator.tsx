@@ -1,63 +1,63 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { DEFAULT_CHOICES, generateCommand } from '@/lib/generate-command'
-import type { StackChoices } from '@scaffold-stack/config-schema'
+import { useState } from "react";
+import { DEFAULT_CHOICES, generateCommand } from "@/lib/generate-command";
+import type { StackChoices } from "@scaffold-stack/config-schema";
 
-import { SectionStack } from './section-stack'
-import { SectionQuality } from './section-quality'
-import { SectionExtras } from './section-extras'
+import { SectionStack } from "./section-stack";
+import { SectionQuality } from "./section-quality";
+import { SectionExtras } from "./section-extras";
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import Link from 'next/link'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { CheckIcon, CopyIcon } from '@phosphor-icons/react'
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { CheckIcon, CopyIcon } from "@phosphor-icons/react";
 
 interface ConfiguratorProps {
-  isSignedIn: boolean
-  initialChoices?: Partial<StackChoices>
+  isSignedIn: boolean;
+  initialChoices?: Partial<StackChoices>;
 }
 
 export function Configurator({ isSignedIn, initialChoices }: ConfiguratorProps) {
   const [choices, setChoices] = useState<StackChoices>({
     ...DEFAULT_CHOICES,
     ...initialChoices,
-  })
+  });
 
-  const [copied, setCopied] = useState(false)
-  const [saving, setSaving] = useState(false)
-  const [configName, setConfigName] = useState('')
+  const [copied, setCopied] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [configName, setConfigName] = useState("");
 
   // Instantly generates the string every time a render occurs
-  const liveCommand = generateCommand(choices)
+  const liveCommand = generateCommand(choices);
 
   function update(partial: Partial<StackChoices>) {
-    setChoices((prev) => ({ ...prev, ...partial }))
+    setChoices((prev) => ({ ...prev, ...partial }));
   }
 
   async function handleCopy() {
-    await navigator.clipboard.writeText(liveCommand)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+    await navigator.clipboard.writeText(liveCommand);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   }
 
   async function handleSave() {
-    if (!configName.trim()) return
-    setSaving(true)
+    if (!configName.trim()) return;
+    setSaving(true);
     try {
-      await fetch('/api/configs', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      await fetch("/api/configs", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: configName, choices }),
-      })
-      alert('Config saved to your dashboard!')
-      setConfigName('')
+      });
+      alert("Config saved to your dashboard!");
+      setConfigName("");
     } catch {
-      alert('Failed to save configuration.')
+      alert("Failed to save configuration.");
     } finally {
-      setSaving(false)
+      setSaving(false);
     }
   }
 
@@ -66,25 +66,31 @@ export function Configurator({ isSignedIn, initialChoices }: ConfiguratorProps) 
       {/* Left Column: The Configuration Options (Scrollable) */}
       <div className="flex-1 space-y-16 pb-20">
         <section>
-          <div className="mb-6 border-b border-border pb-4">
-            <h2 className="text-xl font-bold text-foreground">Core Stack</h2>
-            <p className="text-sm text-muted-foreground mt-1">Choose your runtime, package manager, and framework preferences.</p>
+          <div className="border-border mb-6 border-b pb-4">
+            <h2 className="text-foreground text-xl font-bold">Core Stack</h2>
+            <p className="text-muted-foreground mt-1 text-sm">
+              Choose your runtime, package manager, and framework preferences.
+            </p>
           </div>
           <SectionStack choices={choices} update={update} />
         </section>
 
         <section>
-          <div className="mb-6 border-b border-border pb-4">
-            <h2 className="text-xl font-bold text-foreground">Code Quality</h2>
-            <p className="text-sm text-muted-foreground mt-1">Configure ESLint and Prettier formatting standard rules.</p>
+          <div className="border-border mb-6 border-b pb-4">
+            <h2 className="text-foreground text-xl font-bold">Code Quality</h2>
+            <p className="text-muted-foreground mt-1 text-sm">
+              Configure ESLint and Prettier formatting standard rules.
+            </p>
           </div>
           <SectionQuality choices={choices} update={update} />
         </section>
 
         <section>
-          <div className="mb-6 border-b border-border pb-4">
-            <h2 className="text-xl font-bold text-foreground">Database Layer</h2>
-            <p className="text-sm text-muted-foreground mt-1">Drop in your preferred ORM and database layer connection configuration.</p>
+          <div className="border-border mb-6 border-b pb-4">
+            <h2 className="text-foreground text-xl font-bold">Database Layer</h2>
+            <p className="text-muted-foreground mt-1 text-sm">
+              Drop in your preferred ORM and database layer connection configuration.
+            </p>
           </div>
           <SectionExtras choices={choices} update={update} />
         </section>
@@ -108,7 +114,7 @@ export function Configurator({ isSignedIn, initialChoices }: ConfiguratorProps) 
                 onClick={handleCopy}
                 variant="ghost"
                 size="icon"
-                className="absolute top-3 right-3 font-mono"
+                className="absolute top-3 right-3"
               >
                 {copied ? (
                   <CheckIcon weight="bold" className="text-emerald-500" />
@@ -134,7 +140,7 @@ export function Configurator({ isSignedIn, initialChoices }: ConfiguratorProps) 
                   disabled={saving || !configName.trim()}
                   className="min-w-xs font-mono font-bold"
                 >
-                  {saving ? 'Saving...' : 'Save preset'}
+                  {saving ? "Saving..." : "Save preset"}
                 </Button>
               </div>
             ) : (
@@ -144,7 +150,7 @@ export function Configurator({ isSignedIn, initialChoices }: ConfiguratorProps) 
                   className="hover:text-primary text-foreground underline underline-offset-4 transition-colors"
                 >
                   Sign in
-                </Link>{' '}
+                </Link>{" "}
                 to save this stack preset to your dashboard.
               </p>
             )}
@@ -152,5 +158,5 @@ export function Configurator({ isSignedIn, initialChoices }: ConfiguratorProps) 
         </Card>
       </div>
     </div>
-  )
+  );
 }

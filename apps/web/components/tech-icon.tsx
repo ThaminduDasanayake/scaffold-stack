@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { Icon } from "@phosphor-icons/react";
 
 export function TechIcon({
   src,
@@ -11,30 +11,23 @@ export function TechIcon({
   className,
 }: {
   src: string;
-  fallbackIcon?: any;
+  fallbackIcon?: Icon;
   alt: string;
   className?: string;
 }) {
   const [error, setError] = useState(false);
   if (error || !src) {
     if (Fallback) {
-      return (
-        <Fallback
-          weight="bold"
-          className={cn('className="text-foreground shrink-0" size-8', className)}
-        />
-      );
+      return <Fallback className={cn("text-primary/80 size-6 shrink-0 transition-colors duration-200", className)} />;
     }
     return null;
   }
   return (
-    <Image
+    <img
       src={src}
       alt={alt}
-      width={400}
-      height={400}
       onError={() => setError(true)}
-      className={cn("shrink-0 object-contain", className)}
+      className={cn("size-8 shrink-0 object-contain transition-all duration-300", className)}
     />
   );
 }

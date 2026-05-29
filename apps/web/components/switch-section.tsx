@@ -7,14 +7,14 @@ export function SwitchSection({
   label,
   description,
   value,
-  onChange,
+  onChangeAction,
   logoPath,
   logoClassName,
 }: {
   label: string;
   description: string;
   value: boolean;
-  onChange: (checked: boolean) => void;
+  onChangeAction: (checked: boolean) => void;
   logoPath?: string;
   logoClassName?: string;
 }) {
@@ -32,7 +32,7 @@ export function SwitchSection({
         <span className="text-muted-foreground font-mono text-xs font-bold uppercase">
           {value ? "Enabled" : "Disabled"}
         </span>
-        <Switch checked={value} onCheckedChange={onChange} />
+        <Switch checked={value} onCheckedChange={onChangeAction} />
       </div>
     </div>
   );

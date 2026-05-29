@@ -4,12 +4,13 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { TechIcon } from "@/components/tech-icon";
 import { Icon } from "@phosphor-icons/react";
+import React from "react";
 
 export function OptionCard({
   label,
   description,
   selected,
-  onClick,
+  onClickAction,
   logoPath,
   fallbackIcon,
   layout = "vertical",
@@ -19,9 +20,9 @@ export function OptionCard({
   label: string;
   description?: string;
   selected: boolean;
-  onClick: () => void;
+  onClickAction: () => void;
   logoPath?: string;
-  fallbackIcon?: any;
+  fallbackIcon?: Icon;
   layout?: "vertical" | "horizontal";
   className?: string;
   logoClassName?: string;
@@ -40,14 +41,14 @@ export function OptionCard({
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
-      onClick();
+      onClickAction();
     }
   };
 
   if (layout === "horizontal") {
     return (
       <Card
-        onClick={onClick}
+        onClick={onClickAction}
         onKeyDown={handleKeyDown}
         role="button"
         tabIndex={0}
@@ -80,7 +81,7 @@ export function OptionCard({
 
   return (
     <Card
-      onClick={onClick}
+      onClick={onClickAction}
       onKeyDown={handleKeyDown}
       role="button"
       tabIndex={0}

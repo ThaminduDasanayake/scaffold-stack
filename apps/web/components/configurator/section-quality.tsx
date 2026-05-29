@@ -16,7 +16,7 @@ export function SectionQuality({ choices, update }: Props) {
         label="ESLint Verification"
         description="Integrate pluggable linting utility tool rules to find and fix patterns in your code."
         value={choices.eslint}
-        onChange={(checked) => update({ eslint: checked })}
+        onChangeAction={(checked) => update({ eslint: checked })}
         logoPath={`/logos/eslint.svg`}
         logoClassName="size-8!"
       />
@@ -26,7 +26,7 @@ export function SectionQuality({ choices, update }: Props) {
         label="Prettier Formatting"
         description="Integrate opinionated code formatter support. Automatically formats code on save via prettier.config.mjs rules."
         value={choices.prettier}
-        onChange={(checked) => update({ prettier: checked })}
+        onChangeAction={(checked) => update({ prettier: checked })}
         logoPath={`/logos/prettier.svg`}
         logoClassName="size-8!"
       />

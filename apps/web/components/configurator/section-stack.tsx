@@ -26,7 +26,7 @@ export function SectionStack({ choices, update }: Props) {
               label={pm.label}
               description={pm.cmd}
               selected={choices.packageManager === pm.value}
-              onClick={() => update({ packageManager: pm.value })}
+              onClickAction={() => update({ packageManager: pm.value })}
               logoPath={`/logos/${pm.value}.svg`}
               logoClassName={pm.logoClassName}
             />
@@ -46,7 +46,7 @@ export function SectionStack({ choices, update }: Props) {
               label={fw.label}
               description={fw.description}
               selected={choices.framework === fw.value}
-              onClick={() => update({ framework: fw.value })}
+              onClickAction={() => update({ framework: fw.value })}
               logoPath={`/logos/${fw.value === "nextjs" ? "nextjs" : "vite"}.svg`}
               layout="horizontal"
               logoClassName={fw.logoClassName}
@@ -67,7 +67,7 @@ export function SectionStack({ choices, update }: Props) {
               label={lang.label}
               description={lang.description}
               selected={choices.language === lang.value}
-              onClick={() => update({ language: lang.value })}
+              onClickAction={() => update({ language: lang.value })}
               logoPath={`/logos/${lang.value}.svg`}
               layout="horizontal"
               logoClassName={lang.logoClassName}
@@ -81,7 +81,7 @@ export function SectionStack({ choices, update }: Props) {
         label="Tailwind CSS v4"
         description="Include the latest high-performance, utility-first styling engine."
         value={choices.tailwind}
-        onChange={(checked) => update({ tailwind: checked })}
+        onChangeAction={(checked) => update({ tailwind: checked })}
         logoPath={`/logos/tailwind.svg`}
       />
 
@@ -90,7 +90,7 @@ export function SectionStack({ choices, update }: Props) {
         label="shadcn/ui"
         description="Include beautifully designed components built with Tailwind CSS and Radix UI."
         value={choices.shadcn}
-        onChange={(checked) => update({ shadcn: checked })}
+        onChangeAction={(checked) => update({ shadcn: checked })}
         logoPath={`/logos/shadcn.png`}
       />
     </div>
