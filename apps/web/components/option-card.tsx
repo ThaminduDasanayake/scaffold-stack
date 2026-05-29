@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { TechIcon } from "@/components/tech-icon";
 import { Icon } from "@phosphor-icons/react";
@@ -84,18 +84,19 @@ export function OptionCard({
       onKeyDown={handleKeyDown}
       role="button"
       tabIndex={0}
-      className={cn(interactiveStyles, className)}
+      className={cn(interactiveStyles, className, "")}
     >
+      <CardHeader className="flex h-7 w-full items-center justify-between">
+        <TechIcon
+          src={logoPath || ""}
+          fallbackIcon={fallbackIcon}
+          alt={label}
+          className={logoClassName}
+        />
+        {selected && <span className="bg-accent h-1.5 w-1.5 rounded-full" />}
+      </CardHeader>
       <CardContent className="space-y-3">
-        <div className="flex w-full items-center justify-between">
-          <TechIcon
-            src={logoPath || ""}
-            fallbackIcon={fallbackIcon}
-            alt={label}
-            className={logoClassName}
-          />
-          {selected && <span className="bg-accent h-1.5 w-1.5 rounded-full" />}
-        </div>
+        {/*<div className="flex w-full items-center justify-between"></div>*/}
         <div>
           <p className="font-mono text-sm font-bold">{label}</p>
           {description && (

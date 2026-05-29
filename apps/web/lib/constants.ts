@@ -32,10 +32,10 @@ export interface DBOption {
 }
 
 export const PACKAGE_MANAGERS: PMOption[] = [
-  { value: "pnpm", label: "pnpm", cmd: "pnpm dlx", logoClassName: "size-8" },
-  { value: "npm", label: "npm", cmd: "npx", logoClassName: "size-8" },
-  { value: "yarn", label: "yarn", cmd: "yarn dlx", logoClassName: "size-8" },
-  { value: "bun", label: "bun", cmd: "bunx", logoClassName: "size-8" },
+  { value: "pnpm", label: "pnpm", cmd: "pnpm dlx", logoClassName: "size-10" },
+  { value: "npm", label: "npm", cmd: "npx", logoClassName: "size-12" },
+  { value: "yarn", label: "yarn", cmd: "yarn dlx", logoClassName: "size-9" },
+  { value: "bun", label: "bun", cmd: "bunx", logoClassName: "size-9" },
 ];
 
 export const FRAMEWORKS: FrameworkOption[] = [
@@ -87,13 +87,13 @@ export const DATABASE_ORMS: DBOption[] = [
     label: "Mongoose",
     description: "Robust object modeling helper for MongoDB",
     logoPath: "/logos/mongoose.svg",
-    logoClassName: "size-8",
+    logoClassName: "size-12",
   },
   {
     value: "drizzle",
     label: "Drizzle",
     description: "Fast, fully type-safe light relational SQL ORM",
     logoPath: "/logos/drizzle.webp",
-    logoClassName: "size-8",
+    logoClassName: "size-10",
   },
 ];

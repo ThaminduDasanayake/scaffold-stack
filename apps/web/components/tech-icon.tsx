@@ -21,7 +21,7 @@ export function TechIcon({
       return (
         <Fallback
           weight="bold"
-          className={cn('className="text-foreground shrink-0" size-6', className)}
+          className={cn('className="text-foreground shrink-0" size-8', className)}
         />
       );
     }
