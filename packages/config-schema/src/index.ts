@@ -1,5 +1,5 @@
 export type PackageManager = "pnpm" | "npm" | "yarn" | "bun"
-export type Framework = "nextjs" | "vite-react"
+export type Framework = "nextjs" | "vite"
 export type Language = "typescript" | "javascript"
 export type DBOrm = "none" | "prisma-postgres" | "mongoose" | "drizzle"
 

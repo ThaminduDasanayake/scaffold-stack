@@ -1,15 +1,14 @@
-'use client'
+"use client";
 
-import type { StackChoices } from '@scaffold-stack/config-schema'
-import { PACKAGE_MANAGERS, FRAMEWORKS, LANGUAGES } from '@/lib/constants'
-import { Wind, Sparkle } from '@phosphor-icons/react'
-import { Label } from '@/components/ui/label'
-import { OptionCard } from '@/components/option-card'
-import { SwitchSection } from '@/components/switch-section'
+import type { StackChoices } from "@scaffold-stack/config-schema";
+import { FRAMEWORKS, LANGUAGES, PACKAGE_MANAGERS } from "@/lib/constants";
+import { Label } from "@/components/ui/label";
+import { OptionCard } from "@/components/option-card";
+import { SwitchSection } from "@/components/switch-section";
 
 interface Props {
-  choices: StackChoices
-  update: (partial: Partial<StackChoices>) => void
+  choices: StackChoices;
+  update: (partial: Partial<StackChoices>) => void;
 }
 
 export function SectionStack({ choices, update }: Props) {
@@ -17,7 +16,7 @@ export function SectionStack({ choices, update }: Props) {
     <div className="space-y-8">
       {/* Package Manager */}
       <div>
-        <Label className="text-muted-foreground mb-3 block font-mono text-sm uppercase tracking-wider">
+        <Label className="text-muted-foreground mb-3 block font-mono text-sm tracking-wider uppercase">
           Package Manager
         </Label>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -37,7 +36,7 @@ export function SectionStack({ choices, update }: Props) {
 
       {/* Framework */}
       <div>
-        <Label className="text-muted-foreground mb-3 block font-mono text-sm uppercase tracking-wider">
+        <Label className="text-muted-foreground mb-3 block font-mono text-sm tracking-wider uppercase">
           Framework Selection
         </Label>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -48,7 +47,7 @@ export function SectionStack({ choices, update }: Props) {
               description={fw.description}
               selected={choices.framework === fw.value}
               onClick={() => update({ framework: fw.value })}
-              logoPath={`/logos/${fw.value === 'nextjs' ? 'nextjs' : 'vite'}.svg`}
+              logoPath={`/logos/${fw.value === "nextjs" ? "nextjs" : "vite"}.svg`}
               fallbackIcon={fw.icon}
               layout="horizontal"
             />
@@ -58,7 +57,7 @@ export function SectionStack({ choices, update }: Props) {
 
       {/* Language */}
       <div>
-        <Label className="text-muted-foreground mb-3 block font-mono text-sm uppercase tracking-wider">
+        <Label className="text-muted-foreground mb-3 block font-mono text-sm tracking-wider uppercase">
           Development Language
         </Label>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -83,7 +82,7 @@ export function SectionStack({ choices, update }: Props) {
         description="Include the latest high-performance, utility-first styling engine."
         value={choices.tailwind}
         onChange={(checked) => update({ tailwind: checked })}
-        icon={Wind}
+        logoPath={`/logos/tailwind.svg`}
       />
 
       {/* shadcn/ui Switch */}
@@ -92,8 +91,8 @@ export function SectionStack({ choices, update }: Props) {
         description="Include beautifully designed components built with Tailwind CSS and Radix UI."
         value={choices.shadcn}
         onChange={(checked) => update({ shadcn: checked })}
-        icon={Sparkle}
+        logoPath={`/logos/shadcn.png`}
       />
     </div>
-  )
+  );
 }

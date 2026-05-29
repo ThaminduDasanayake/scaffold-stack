@@ -26,9 +26,9 @@ export function parseFlags(args: string[]): StackChoices {
     }
 
     const framework = (getFlag(args, "framework") ?? "nextjs") as Framework
-    const validFrameworks: Framework[] = ["nextjs", "vite-react"]
+    const validFrameworks: Framework[] = ["nextjs", "vite"]
     if (!validFrameworks.includes(framework)) {
-        console.error(`  Error: Invalid framework "${framework}". Choose from: nextjs, vite-react`)
+        console.error(`  Error: Invalid framework "${framework}". Choose from: nextjs, vite`)
         process.exit(1)
     }
 
