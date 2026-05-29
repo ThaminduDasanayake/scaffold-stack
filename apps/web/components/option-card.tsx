@@ -3,6 +3,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { TechIcon } from "@/components/tech-icon";
+import { Icon } from "@phosphor-icons/react";
 
 export function OptionCard({
   label,
@@ -13,15 +14,17 @@ export function OptionCard({
   fallbackIcon,
   layout = "vertical",
   className,
+  logoClassName,
 }: {
   label: string;
   description?: string;
   selected: boolean;
   onClick: () => void;
   logoPath?: string;
-  fallbackIcon: any;
+  fallbackIcon?: any;
   layout?: "vertical" | "horizontal";
   className?: string;
+  logoClassName?: string;
 }) {
   const interactiveStyles = cn(
     "bg-accent/50 dark:bg-card cursor-pointer text-left ring-0 ring-2 transition-colors duration-200",
@@ -51,7 +54,12 @@ export function OptionCard({
         className={cn(interactiveStyles, className)}
       >
         <CardContent className="space-y-4">
-          <TechIcon src={logoPath || ""} fallbackIcon={fallbackIcon} alt={label} />
+          <TechIcon
+            src={logoPath || ""}
+            fallbackIcon={fallbackIcon}
+            alt={label}
+            className={logoClassName}
+          />
           <div>
             <p className="font-mono text-sm font-bold">{label}</p>
             {description && (
@@ -80,7 +88,12 @@ export function OptionCard({
     >
       <CardContent className="space-y-3">
         <div className="flex w-full items-center justify-between">
-          <TechIcon src={logoPath || ""} fallbackIcon={fallbackIcon} alt={label} />
+          <TechIcon
+            src={logoPath || ""}
+            fallbackIcon={fallbackIcon}
+            alt={label}
+            className={logoClassName}
+          />
           {selected && <span className="bg-accent h-1.5 w-1.5 rounded-full" />}
         </div>
         <div>

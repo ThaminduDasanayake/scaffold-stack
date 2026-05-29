@@ -18,6 +18,7 @@ export function SectionQuality({ choices, update }: Props) {
         value={choices.eslint}
         onChange={(checked) => update({ eslint: checked })}
         logoPath={`/logos/eslint.svg`}
+        logoClassName="size-8!"
       />
 
       {/* Prettier Switch */}
@@ -27,6 +28,7 @@ export function SectionQuality({ choices, update }: Props) {
         value={choices.prettier}
         onChange={(checked) => update({ prettier: checked })}
         logoPath={`/logos/prettier.svg`}
+        logoClassName="size-8!"
       />
     </div>
   );

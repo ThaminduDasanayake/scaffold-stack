@@ -27,6 +27,7 @@ export function SectionExtras({ choices, update }: Props) {
               onClick={() => update({ db: db.value })}
               logoPath={db.logoPath}
               fallbackIcon={db.fallbackIcon}
+              logoClassName={db.logoClassName}
             />
           ))}
         </div>

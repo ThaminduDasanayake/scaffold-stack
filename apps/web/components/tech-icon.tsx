@@ -2,19 +2,30 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 export function TechIcon({
   src,
   fallbackIcon: Fallback,
   alt,
+  className,
 }: {
   src: string;
-  fallbackIcon: any;
+  fallbackIcon?: any;
   alt: string;
+  className?: string;
 }) {
   const [error, setError] = useState(false);
   if (error || !src) {
-    return <Fallback weight="bold" className="text-foreground size-6 shrink-0" />;
+    if (Fallback) {
+      return (
+        <Fallback
+          weight="bold"
+          className={cn('className="text-foreground shrink-0" size-6', className)}
+        />
+      );
+    }
+    return null;
   }
   return (
     <Image
@@ -23,7 +34,7 @@ export function TechIcon({
       width={400}
       height={400}
       onError={() => setError(true)}
-      className="size-8 shrink-0 object-contain"
+      className={cn("shrink-0 object-contain", className)}
     />
   );
 }

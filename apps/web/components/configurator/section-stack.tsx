@@ -28,7 +28,7 @@ export function SectionStack({ choices, update }: Props) {
               selected={choices.packageManager === pm.value}
               onClick={() => update({ packageManager: pm.value })}
               logoPath={`/logos/${pm.value}.svg`}
-              fallbackIcon={pm.icon}
+              logoClassName={pm.logoClassName}
             />
           ))}
         </div>
@@ -48,8 +48,8 @@ export function SectionStack({ choices, update }: Props) {
               selected={choices.framework === fw.value}
               onClick={() => update({ framework: fw.value })}
               logoPath={`/logos/${fw.value === "nextjs" ? "nextjs" : "vite"}.svg`}
-              fallbackIcon={fw.icon}
               layout="horizontal"
+              logoClassName={fw.logoClassName}
             />
           ))}
         </div>
@@ -69,8 +69,8 @@ export function SectionStack({ choices, update }: Props) {
               selected={choices.language === lang.value}
               onClick={() => update({ language: lang.value })}
               logoPath={`/logos/${lang.value}.svg`}
-              fallbackIcon={lang.icon}
               layout="horizontal"
+              logoClassName={lang.logoClassName}
             />
           ))}
         </div>
