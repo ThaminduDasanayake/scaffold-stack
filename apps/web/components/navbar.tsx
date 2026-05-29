@@ -20,7 +20,7 @@ export function Navbar() {
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/configure", label: "Configure" },
-    { href: "/dashboard", label: "Dashboard", protected: true },
+    { href: "/collection", label: "Collection", protected: true },
   ];
 
   return (
@@ -87,7 +87,7 @@ export function Navbar() {
               )}
 
               {/* Sign Out Button */}
-              <Button onClick={handleSignOut} variant="destructive">
+              <Button onClick={handleSignOut} variant="destructive" className="font-mono font-bold">
                 Sign Out
               </Button>
             </div>

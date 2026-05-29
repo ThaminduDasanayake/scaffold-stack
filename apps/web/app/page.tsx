@@ -6,7 +6,7 @@ import { Metadata } from "next";
 import { ArrowRightIcon } from "@phosphor-icons/react/ssr";
 
 export const metadata: Metadata = {
-  title: "scaffold-stack | Next.js Monorepo Stack Scaffolding Dashboard",
+  title: "scaffold-stack | Next.js Monorepo Stack Scaffolding Collection",
   description:
     "Instantly configure Next.js monorepos with real-time CLI bash compiler feedback, database integrations, and docker configs.",
 };
@@ -26,9 +26,7 @@ export default async function Home() {
           <h1 className="from-foreground via-foreground to-muted-foreground bg-linear-to-r bg-clip-text text-5xl leading-none font-extrabold tracking-tight text-transparent lg:text-7xl">
             The Perfect Next.js Starter.
             <br />
-            <span className="from-primary bg-linear-to-r to-emerald-400 bg-clip-text text-transparent">
-              Zero Boilerplate. One Command.
-            </span>
+            <span className="gradient-text">Zero Boilerplate. One Command.</span>
           </h1>
           <p className="text-muted-foreground mx-auto max-w-2xl text-base leading-relaxed font-medium lg:text-lg">
             Instantly configure custom environments. Pick package managers, databases, strict
@@ -48,13 +46,13 @@ export default async function Home() {
             </Button>
           </Link>
           {session ? (
-            <Link href="/dashboard">
+            <Link href="/collection">
               <Button
                 variant="outline"
                 size="lg"
                 className="border-accent font-mono font-bold tracking-wider uppercase transition-all hover:scale-102 active:scale-95"
               >
-                Your Presets <ArrowRightIcon weight="bold" />
+                View Collection <ArrowRightIcon weight="bold" />
               </Button>
             </Link>
           ) : (

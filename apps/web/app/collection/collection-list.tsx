@@ -8,6 +8,18 @@ import { Button } from "@/components/ui/button";
 import { ArrowRightIcon } from "@phosphor-icons/react/ssr";
 import { CheckIcon, CircleNotchIcon, CopyIcon, TrashIcon } from "@phosphor-icons/react";
 import { Badge } from "@/components/ui/badge";
+import { toast } from "sonner";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 interface Config {
   id: string;
@@ -18,7 +30,7 @@ interface Config {
   updatedAt: string;
 }
 
-export function DashboardList({ initialConfigs }: { initialConfigs: Config[] }) {
+export function CollectionList({ initialConfigs }: { initialConfigs: Config[] }) {
   const [configs, setConfigs] = useState<Config[]>(initialConfigs);
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
@@ -27,11 +39,11 @@ export function DashboardList({ initialConfigs }: { initialConfigs: Config[] }) 
     const cmd = generateCommand(choices);
     await navigator.clipboard.writeText(cmd);
     setCopiedId(id);
+    toast.success("Command copied to clipboard!");
     setTimeout(() => setCopiedId(null), 2000);
   }
 
   async function handleDelete(id: string) {
-    if (!confirm("Are you sure you want to delete this preset?")) return;
     setDeletingId(id);
     try {
       const res = await fetch(`/api/configs/${id}`, {
@@ -39,11 +51,12 @@ export function DashboardList({ initialConfigs }: { initialConfigs: Config[] }) 
       });
       if (res.ok) {
         setConfigs((prev) => prev.filter((c) => c.id !== id));
+        toast.success("Preset deleted successfully.");
       } else {
-        alert("Failed to delete configuration.");
+        toast.error("Failed to delete configuration.");
       }
     } catch {
-      alert("An error occurred. Failed to delete configuration.");
+      toast.error("An error occurred. Failed to delete configuration.");
     } finally {
       setDeletingId(null);
     }
@@ -53,16 +66,13 @@ export function DashboardList({ initialConfigs }: { initialConfigs: Config[] }) 
   function getStackBadges(choices: any) {
     const badges: string[] = [];
     if (choices.packageManager) badges.push(choices.packageManager);
-    if (choices.tailwind) badges.push("Tailwind v4");
-    if (choices.tsStrict) badges.push("TS Strict");
-    if (choices.eslint && choices.eslint !== "none") badges.push(`ESLint (${choices.eslint})`);
+    if (choices.framework) badges.push(choices.framework);
+    if (choices.language) badges.push(choices.language);
+    if (choices.tailwind) badges.push("Tailwind");
+    if (choices.shadcn) badges.push("shadcn/ui");
+    if (choices.eslint) badges.push("ESLint");
     if (choices.prettier) badges.push("Prettier");
-    if (choices.structure) badges.push(`By ${choices.structure}`);
-    if (choices.ui && choices.ui !== "none") badges.push(`UI: ${choices.ui}`);
     if (choices.db && choices.db !== "none") badges.push(`DB: ${choices.db}`);
-    if (choices.testing && choices.testing !== "none") badges.push(choices.testing);
-    if (choices.dockerCompose) badges.push("Docker");
-    if (choices.husky) badges.push("Husky");
     return badges;
   }
 
@@ -139,18 +149,36 @@ export function DashboardList({ initialConfigs }: { initialConfigs: Config[] }) 
                 )}
               </Button>
 
-              <Button
-                onClick={() => handleDelete(config.id)}
-                disabled={isDeleting}
-                variant="destructive"
-                size="icon-sm"
-              >
-                {isCopied ? (
-                  <CircleNotchIcon className="animate-spin" />
-                ) : (
-                  <TrashIcon weight="duotone" />
-                )}
-              </Button>
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <Button disabled={isDeleting} variant="destructive" size="icon-sm">
+                    {isDeleting ? (
+                      <CircleNotchIcon className="animate-spin" />
+                    ) : (
+                      <TrashIcon weight="duotone" />
+                    )}
+                  </Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>Delete preset?</AlertDialogTitle>
+                    <AlertDialogDescription>
+                      This will permanently delete the preset &quot;{config.name}&quot; and remove
+                      it from your collection.
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogAction
+                      variant="destructive"
+                      onClick={() => handleDelete(config.id)}
+
+                    >
+                      Delete
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
             </CardFooter>
           </Card>
         );

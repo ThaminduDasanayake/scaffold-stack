@@ -25,7 +25,9 @@ export function SwitchSection({
 
         <div>
           <p className="text-foreground text-sm font-bold">{label}</p>
-          <p className="text-muted-foreground mt-0.5 text-xs">{description}</p>
+          <p className="text-muted-foreground mt-0.5 max-w-lg text-xs whitespace-pre-wrap">
+            {description}
+          </p>
         </div>
       </div>
       <div className="flex items-center gap-3">

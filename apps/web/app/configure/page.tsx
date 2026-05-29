@@ -49,8 +49,7 @@ export default async function ConfigurePage({
     <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
       {/* Header section with grid lines */}
       <div className="border-border/40 relative mb-14 border-b pb-8">
-        <div className="from-primary/30 absolute top-0 bottom-0 -left-10 hidden w-px bg-linear-to-b to-transparent xl:block" />
-        <h1 className="from-foreground to-muted-foreground bg-linear-to-r bg-clip-text text-4xl font-extrabold tracking-tight text-transparent lg:text-5xl">
+        <h1 className="from-foreground to-accent w-fit bg-linear-to-r bg-clip-text py-2 text-4xl font-extrabold tracking-tight text-transparent lg:text-5xl">
           Configure your monorepo stack
         </h1>
         <p className="text-muted-foreground mt-3 max-w-2xl font-mono text-sm leading-relaxed tracking-wider uppercase">

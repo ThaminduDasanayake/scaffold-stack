@@ -18,7 +18,12 @@ export function TechIcon({
   const [error, setError] = useState(false);
   if (error || !src) {
     if (Fallback) {
-      return <Fallback className={cn("text-primary/80 size-6 shrink-0 transition-colors duration-200", className)} />;
+      return (
+        <Fallback
+          weight="bold"
+          className={cn("size-6 shrink-0 transition-colors duration-200", className)}
+        />
+      );
     }
     return null;
   }

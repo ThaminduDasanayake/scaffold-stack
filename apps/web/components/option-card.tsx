@@ -97,7 +97,6 @@ export function OptionCard({
         {selected && <span className="bg-accent h-1.5 w-1.5 rounded-full" />}
       </CardHeader>
       <CardContent className="space-y-3">
-        {/*<div className="flex w-full items-center justify-between"></div>*/}
         <div>
           <p className="font-mono text-sm font-bold">{label}</p>
           {description && (

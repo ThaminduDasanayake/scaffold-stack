@@ -14,6 +14,7 @@ import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { CheckIcon, CopyIcon } from "@phosphor-icons/react";
+import { toast } from "sonner";
 
 interface ConfiguratorProps {
   isSignedIn: boolean;
@@ -40,6 +41,7 @@ export function Configurator({ isSignedIn, initialChoices }: ConfiguratorProps) 
   async function handleCopy() {
     await navigator.clipboard.writeText(liveCommand);
     setCopied(true);
+    toast.success("Command copied to clipboard!");
     setTimeout(() => setCopied(false), 2000);
   }
 
@@ -52,10 +54,10 @@ export function Configurator({ isSignedIn, initialChoices }: ConfiguratorProps) 
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: configName, choices }),
       });
-      alert("Config saved to your dashboard!");
+      toast.success("Configuration saved to your collection!");
       setConfigName("");
     } catch {
-      alert("Failed to save configuration.");
+      toast.error("Failed to save configuration.");
     } finally {
       setSaving(false);
     }
@@ -151,7 +153,7 @@ export function Configurator({ isSignedIn, initialChoices }: ConfiguratorProps) 
                 >
                   Sign in
                 </Link>{" "}
-                to save this stack preset to your dashboard.
+                to save this stack preset to your collection.
               </p>
             )}
           </CardContent>
